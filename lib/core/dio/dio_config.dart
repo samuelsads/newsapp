@@ -12,7 +12,6 @@ final Dio dioConfig = Dio(
     baseUrl: baseUrl,
     headers: {
       'Accept': 'application/json',
-      'API_KEY': apiKey,
     },
   ),
 );
