@@ -8,6 +8,7 @@ class NewsApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => MaterialApp.router(
+        debugShowCheckedModeBanner: false,
         routerConfig: appRouter,
       );
 }
