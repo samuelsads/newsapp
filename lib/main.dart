@@ -1,16 +1,21 @@
-
-
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:newsapp/core/routes/app_routes.dart';
+import 'package:newsapp/news_app.dart';
+import 'package:path_provider/path_provider.dart';
 
-void main() => runApp(const MyApp());
-/// Class use to define all starting configurations
-class MyApp extends StatelessWidget {
-  /// Class use to define all starting configurations
-  const MyApp({super.key});
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
 
-  @override
-  Widget build(BuildContext context) => MaterialApp.router(
-      routerConfig: appRouter,
-    );
+  // Load the .env file
+  await dotenv.load();
+
+  HydratedBloc.storage = await HydratedStorage.build(
+    storageDirectory: await getApplicationDocumentsDirectory(),
+  );
+
+  runApp(const NewsApp());
 }
+
+
