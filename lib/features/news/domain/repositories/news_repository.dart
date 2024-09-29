@@ -10,5 +10,5 @@ import 'package:newsapp/features/news/domain/entities/news.dart';
 abstract class NewsRepository{
 
   ///Get top news
-  Future<Either<Failure, List<News>>> getTopNews();
+  Future<Either<Failure, News>> getTopNews({int page = 1});
 }
