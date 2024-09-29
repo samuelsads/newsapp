@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
-import 'package:newsapp/core/dio/dio_config.dart';
+import 'package:newsapp/core/configs/dio/dio_config.dart';
 import 'package:newsapp/utils/helpers/http_client_helper.dart';
 
 /// Global service locator instance for dependency injection.
