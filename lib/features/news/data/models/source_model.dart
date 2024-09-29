@@ -10,7 +10,7 @@ class SourceModel extends Source {
 
   ///Converts a json object to a [SourceModel]
   factory SourceModel.fromJson(Map<String, dynamic> json) => SourceModel(
-        id: json['id'],
+        id: json['id']??'',
         name: json['name'],
       );
 }

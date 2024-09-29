@@ -19,13 +19,13 @@ class ArticleModel extends Article {
   ///converts a json object to an [ArticleModel].
   factory ArticleModel.fromJson(Map<String, dynamic> json) => ArticleModel(
         sourceModel: SourceModel.fromJson(json['source']),
-        author: json['author'],
+        author: json['author'] ?? '' ,
         title: json['title'],
         description: json['description'],
         url: json['url'],
         urlToImage: json['urlToImage'],
         publishedAt: DateTime.parse(json['publishedAt']),
-        content: json['content'],
+        content: json['content']??'',
       );
 
   ///Represents the source model;

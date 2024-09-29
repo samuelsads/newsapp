@@ -15,8 +15,9 @@ class NewsModel extends News {
   factory NewsModel.fromJson(Map<String, dynamic> json) => NewsModel(
         status: json['status'],
         totalResults: json['totalResults'],
-        articlesModel: List<ArticleModel>.from(
-            json['articles'].map(ArticleModel.fromJson)),
+        articlesModel: 
+            // ignore: unnecessary_lambdas
+            (json['articles'] as List).map<ArticleModel>((articles) => ArticleModel.fromJson(articles)).toList(),
       );
 
   /// Convert a [ArticleModel] to a json object
