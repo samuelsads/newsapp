@@ -20,10 +20,10 @@ class ArticleModel extends Article {
   factory ArticleModel.fromJson(Map<String, dynamic> json) => ArticleModel(
         sourceModel: SourceModel.fromJson(json['source']),
         author: json['author'] ?? '' ,
-        title: json['title'],
-        description: json['description'],
+        title: json['title']??'',
+        description: json['description']??'',
         url: json['url'],
-        urlToImage: json['urlToImage'],
+        urlToImage: json['urlToImage']??'',
         publishedAt: DateTime.parse(json['publishedAt']),
         content: json['content']??'',
       );

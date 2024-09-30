@@ -10,6 +10,10 @@ class News extends Equatable {
     required this.articles,
   });
 
+
+  ///Constructs to empity News
+  const  News.empty(): this( status:'error', totalResults: 0, articles:const  []);
+
   ///Represent the status
   final String status;
 
