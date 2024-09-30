@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:newsapp/core/configs/get_it/service_locator.dart';
 import 'package:newsapp/core/presentation/widgets/error_widget.dart';
 import 'package:newsapp/features/news/presentation/blocs/top_news/top_news_bloc.dart';
+import 'package:newsapp/features/news/presentation/pages/article_page.dart';
 import 'package:newsapp/utils/enums/request_progress_status.dart';
 
 /// Class used to view news
@@ -117,49 +119,52 @@ class _NewsViewState extends State<NewsView> {
                           itemCount: articles.length,
                           itemBuilder: (context, index) {
                             final article = articles[index];
-                            return Container(
-                              margin: const EdgeInsets.symmetric(
-                                  vertical: 4, horizontal: 24),
-                              child: Row(
-                                children: [
-                                  Expanded(
-                                    child: Container(
-                                      margin: const EdgeInsets.only(right: 8),
-                                      child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          Text(article.author.isNotEmpty
-                                              ? article.source.name
-                                              : 'S/N'),
-                                          Text(
-                                            article.description.isNotEmpty
-                                                ? article.description
-                                                : 'S/N',
-                                            maxLines: 3,
-                                            overflow: TextOverflow.ellipsis,
-                                            style:
-                                                const TextStyle(fontSize: 10),
-                                          )
-                                        ],
+                            return GestureDetector(
+                              onTap: ()=> context.pushNamed(ArticlePage.pathName,extra: articles[index]),
+                              child: Container(
+                                margin: const EdgeInsets.symmetric(
+                                    vertical: 4, horizontal: 24),
+                                child: Row(
+                                  children: [
+                                    Expanded(
+                                      child: Container(
+                                        margin: const EdgeInsets.only(right: 8),
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Text(article.author.isNotEmpty
+                                                ? article.source.name
+                                                : 'S/N'),
+                                            Text(
+                                              article.description.isNotEmpty
+                                                  ? article.description
+                                                  : 'S/N',
+                                              maxLines: 3,
+                                              overflow: TextOverflow.ellipsis,
+                                              style:
+                                                  const TextStyle(fontSize: 10),
+                                            )
+                                          ],
+                                        ),
                                       ),
                                     ),
-                                  ),
-                                  ClipRRect(
-                                      borderRadius: BorderRadius.circular(12),
-                                      child: Image.network(
-                                        article.urlToImage,
-                                        width: 80,
-                                        height: 80,
-                                        fit: BoxFit.fill,
-                                        errorBuilder:
-                                            (context, error, stackTrace) =>
-                                                const Icon(
-                                          Icons.image,
-                                          size: 80,
-                                        ),
-                                      )),
-                                ],
+                                    ClipRRect(
+                                        borderRadius: BorderRadius.circular(12),
+                                        child: Image.network(
+                                          article.urlToImage.isNotEmpty? article.urlToImage: 'https://upload.wikimedia.org/wikipedia/commons/a/a3/Image-not-found.png',
+                                          width: 80,
+                                          height: 80,
+                                          fit: BoxFit.fill,
+                                          errorBuilder:
+                                              (context, error, stackTrace) =>
+                                                  const Icon(
+                                            Icons.image,
+                                            size: 80,
+                                          ),
+                                        )),
+                                  ],
+                                ),
                               ),
                             );
                           },
