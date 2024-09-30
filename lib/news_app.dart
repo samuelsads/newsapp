@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:newsapp/core/routes/app_routes.dart';
+// ignore: depend_on_referenced_packages
 import 'package:flutter_localizations/flutter_localizations.dart';
 /// Class use to define all starting configurations
 class NewsApp extends StatelessWidget {

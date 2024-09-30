@@ -120,7 +120,7 @@ class _NewsViewState extends State<NewsView> {
                           itemBuilder: (context, index) {
                             final article = articles[index];
                             return GestureDetector(
-                              onTap: ()=> context.pushNamed(ArticlePage.pathName,extra: articles[index]),
+                              onTap: () async => context.pushNamed(ArticlePage.pathName,extra: articles[index]),
                               child: Container(
                                 margin: const EdgeInsets.symmetric(
                                     vertical: 4, horizontal: 24),

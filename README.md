@@ -1,16 +1,12 @@
 # newsapp
 
-A new Flutter project.
+Example
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+- En el archivo .env que se encuentra en la raíz del proyecto colocar en la variable API_KEY el token que deseen usar, por medio del correo electrónico les facilite uno pero sientanse libres de utilizar uno propio si asi lo desean.
 
-A few resources to get you started if this is your first Flutter project:
+- Versión de flutter utilizada 3.22.2
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+- Versión de dart utilizada  3.4.3
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
