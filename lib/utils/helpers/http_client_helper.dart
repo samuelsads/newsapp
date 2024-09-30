@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:dio/dio.dart';
 import 'package:newsapp/utils/enums/content_type.dart';
 import 'package:newsapp/utils/enums/request_type.dart';
@@ -192,6 +190,7 @@ class HttpClientHelperImpl implements HttpClientHelper {
         },
       );
 
+  // ignore: unused_element
   String _formDataToString(FormData formData) {
     final StringBuffer buffer = StringBuffer();
     for (var element in formData.fields) {
