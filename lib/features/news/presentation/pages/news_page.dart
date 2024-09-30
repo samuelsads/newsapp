@@ -5,8 +5,6 @@ import 'package:newsapp/core/presentation/widgets/error_widget.dart';
 import 'package:newsapp/features/news/presentation/blocs/top_news/top_news_bloc.dart';
 import 'package:newsapp/utils/enums/request_progress_status.dart';
 
-
-
 /// Class used to view news
 class NewsPage extends StatelessWidget {
   /// Class use tu view news
@@ -38,16 +36,16 @@ class NewsView extends StatefulWidget {
 
 ///Controller to pagination
 late ScrollController _controller;
-class _NewsViewState extends State<NewsView> {
 
+class _NewsViewState extends State<NewsView> {
   ///Event lo load more top news
-  Future<void> _loadMore()async{
-   context.read<TopNewsBloc>().add(const LoadNextNewsEvent());
+  Future<void> _loadMore() async {
+    context.read<TopNewsBloc>().add(const LoadNextNewsEvent());
   }
 
   @override
   void initState() {
-      _controller  = ScrollController()..addListener(_loadMore);
+    _controller = ScrollController()..addListener(_loadMore);
     super.initState();
   }
 
@@ -67,11 +65,28 @@ class _NewsViewState extends State<NewsView> {
         child: BlocConsumer<TopNewsBloc, TopNewsState>(
           listener: (context, state) {
             if (state.requestProgressStatus.isError) {
-              print('Error');
+              ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                showCloseIcon: true,
+                closeIconColor: const Color(0xFF939598),
+                behavior: SnackBarBehavior.floating,
+                backgroundColor: const Color(0xFFFFF5F5),
+                content: Row(
+                  children: [
+                    const Icon(Icons.error, color: Color(0xFFB3261E)),
+                    const SizedBox(width: 5),
+                    Expanded(
+                      child: Text(
+                        state.errorMessage,
+                        maxLines: 2,
+                      ),
+                    ),
+                  ],
+                ),
+              ));
             }
           },
           builder: (context, state) {
-            if (state.requestProgressStatus.isLoading)  return const Center(child: CircularProgressIndicator());
+            if (state.requestProgressStatus.isLoading) return const Center(child: CircularProgressIndicator());
             if (state.requestProgressStatus.isError) {
               return GlobalErrorWidget(
                 title: 'An error ocurred while loading news. Please try again',
@@ -118,9 +133,13 @@ class _NewsViewState extends State<NewsView> {
                                               ? article.source.name
                                               : 'S/N'),
                                           Text(
-                                            article.description.isNotEmpty? article.description: 'S/N',
+                                            article.description.isNotEmpty
+                                                ? article.description
+                                                : 'S/N',
                                             maxLines: 3,
-                                            style: const TextStyle(fontSize: 10),
+                                            overflow: TextOverflow.ellipsis,
+                                            style:
+                                                const TextStyle(fontSize: 10),
                                           )
                                         ],
                                       ),
@@ -133,7 +152,12 @@ class _NewsViewState extends State<NewsView> {
                                         width: 80,
                                         height: 80,
                                         fit: BoxFit.fill,
-                                        errorBuilder: (context, error, stackTrace) => const Icon(Icons.image, size: 80,),
+                                        errorBuilder:
+                                            (context, error, stackTrace) =>
+                                                const Icon(
+                                          Icons.image,
+                                          size: 80,
+                                        ),
                                       )),
                                 ],
                               ),
@@ -144,8 +168,13 @@ class _NewsViewState extends State<NewsView> {
                     ],
                   ),
                 ),
-
-                if(state.pagination.isLoadMoreRunning)  Positioned( bottom: 10, child: SizedBox( width:MediaQuery.of(context).size.width ,child: const Center(child: CircularProgressIndicator())))
+                if (state.pagination.isLoadMoreRunning)
+                  Positioned(
+                      bottom: 10,
+                      child: SizedBox(
+                          width: MediaQuery.of(context).size.width,
+                          child:
+                              const Center(child: CircularProgressIndicator())))
               ],
             );
           },
